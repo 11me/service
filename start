@@ -1,0 +1,16 @@
+#!/bin/sh
+
+db() {
+  docker run --rm --name db --network db_test -p 5432:5432 -e POSTGRES_PASSWORD=pass  postgres
+}
+
+adminer() {
+  docker run --rm --network db_test -p 8080:8080 adminer
+}
+
+case "$1" in
+  db)
+    db;;
+  adminer)
+    adminer;;
+esac
